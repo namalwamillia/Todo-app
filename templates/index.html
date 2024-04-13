@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title> MY TODO APP</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+   <!-- Latest compiled and minified CSS -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+   <!-- jQuery library -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+   <!-- Popper JS -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+   <!-- Latest compiled JavaScript -->
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        .header {
+            background-image: url('../tropical-beach-wallpaper-beach-backgrounds-587fbb765f9b584db3241860.jpg');
+            /* Replace 'your-image-url.jpg' with the actual path to your image */
+            background-size: cover;
+            background-position: center;
+            color: #ffffff;
+            /* Set text color to white or a suitable contrasting color */
+            padding: 100px 0;
+            margin: 5px;
+            /* Adjust the padding as needed */
+
+            border-radius: 10px;
+        }
+
+        .input-wrapper {
+            background-color: white;
+            height: 60px;
+            padding-top: 10px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .active-item {
+            background-color: #00aeff;
+            color: #ffffffab;
+        }
+        
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 50px;
+            background-color:#dcd8d2 ;
+            border-radius: 10px;
+            box-shadow: 0 0 10px #024232;
+        }
+        body{
+            background-color: pink ;
+        }
+    </style>
+
+
+</head>
+
+<body>
+
+    <!--header-->
+    <div class="header h-75">
+        <section class="container">
+            <h3 class="text-white pl-2"><b> WELCOME TO MY TODO APP!</b></h3>
+            <div class="card-body">
+
+                <form method="post" action="/add">
+                    <div class="row input-wrapper ">
+                        <div class="col-10">
+                            <input class="form-control h-20" type="text" name="task" placeholder="Add a new task"
+                                required>
+                        </div>
+                        <div class="col-2">
+                            <button class="btn  btn-block text-white" type="submit"
+                                style="background-color:#dc7186;">Create</button>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+
+
+
+        </section>
+
+    </div>
+
+
+    <!--List-->
+    <div class="container " style="margin-top: -90px;">
+        <ul class="list-group shadow">
+            {% for task in tasks %}
+
+            <li class="list-group-item">
+                {{task}}
+
+                <form action="{{ url_for('delete_task', task_id=loop.index0) }}" method="post" style="display: inline;">
+                    <button type="submit" style="background-color:transparent; border: 15px; cursor:pointer;color: #e41f1f"><b>Delete</button>
+                   </form>
+
+                <form action="{{ url_for('update_task', task_id=loop.index0) }}" method="POST" >
+                            <input type="text" name="updated_task" placeholder="Update " >
+                            <button type="submit" style="background-color: transparent; border: 15px; cursor: pointer; color:blue;"><b>Update</b></button>
+                </form>
+            </li>
+
+            {% endfor %}
+
+
+        </ul>
+
+    </div>
+
+
+
+
+
+
+
+</body>
+
+</html>
